@@ -412,6 +412,14 @@ class TinyGsmSim7600 : public TinyGsmModem<TinyGsmSim7600>,
     return res;
   }
 
+  String getIMEIImpl() {
+    sendAT(GF("+CGSN"));
+    String res = stream.readStringUntil('\n');
+    waitResponse();
+    res.trim();
+    return res;
+  }
+
   /*
    * Phone Call functions
    */
